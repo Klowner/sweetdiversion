@@ -15,16 +15,16 @@ local sweetdiversion = function (expr)
 
 	local curr_version_t = {love._version_major, love._version_minor, love._version_revision}
 	local op = string.sub(expr, 0, 1)
-	local comparitor
+	local comparator
 
 	if op == '>' or op == '<' then
 		if op == '>' then
-			comparitor = function (a,b) return a == b and 0 or a > b and 1 or -1 end
+			comparator = function (a,b) return a == b and 0 or a > b and 1 or -1 end
 		else
-			comparitor = function (a,b) return a == b and 0 or a < b and 1 or -1 end
+			comparator = function (a,b) return a == b and 0 or a < b and 1 or -1 end
 		end
 	else
-		comparitor = function (a,b) return ('*' == b or a == b) and 1 or -16 end
+		comparator = function (a,b) return ('*' == b or a == b) and 1 or -16 end
 	end
 
 	-- split version from expression into numeric parts
@@ -35,7 +35,7 @@ local sweetdiversion = function (expr)
 
 	local result = 0
 	for i = 1, #expr_version_t do
-		result = result + comparitor(curr_version_t[i], expr_version_t[i]) * (2^(#expr_version_t-i))
+		result = result + comparator(curr_version_t[i], expr_version_t[i]) * (2^(#expr_version_t-i))
 	end
 
 	result = result > 0
