@@ -17,12 +17,10 @@ local sweetdiversion = function (expr)
 	local op = string.sub(expr, 0, 1)
 	local comparator
 
-	if op == '>' or op == '<' then
-		if op == '>' then
-			comparator = function (a,b) return a == b and 0 or a > b and 1 or -1 end
-		else
-			comparator = function (a,b) return a == b and 0 or a < b and 1 or -1 end
-		end
+	if op == '>' then
+		comparator = function (a,b) return a == b and 0 or a > b and 1 or -1 end
+	elseif op == '<' then
+		comparator = function (a,b) return a == b and 0 or a < b and 1 or -1 end
 	else
 		comparator = function (a,b) return ('*' == b or a == b) and 1 or -16 end
 	end
